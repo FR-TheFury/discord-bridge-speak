@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "Canlı çok dilli sesli çevirmen | Neon Gaming",
+    "description": "Konuşun; gerçek zamanlı yazıya döküm, çeviri ve seslendirme alın."
+  },
+  "header": {
+    "h1": "Gerçek zamanlı çok dilli sesli çeviri",
+    "subtitle": "Doğal konuşun. Mesajınızı gerçek zamanlı olarak yazıya döker, çevirir ve okuruz."
+  },
+  "buttons": {
+    "startNow": "Hemen başla",
+    "howItWorks": "Nasıl çalışır?",
+    "translateInterface": "Arayüz dili"
+  },
+  "comment": {
+    "title": "Discord ve daha fazlasıyla çalışır",
+    "text": "Discord görüşmeleriniz, oyunlarınız veya toplantılarınız sırasında bu sayfayı açık bırakın. Tarayıcınız sesinizi yakalar, altyazıları gösterirken çeviriyi seslendirir."
+  },
+  "panel": {
+    "title": "Canlı çeviri",
+    "voiceToText": "Ses → Metin",
+    "translation": "Çeviri",
+    "textMode": "Metin modu",
+    "result": "Sonuç",
+    "unsupportedWarning": "Bu tarayıcı konuşma tanımayı desteklemiyor. Aşağıdaki metin modunu kullanın veya canlı mikrofon için Chrome/Edge deneyin.",
+    "tip": "İpucu: Discord görüşmesi sırasında bu paneli açık tutun. Tarayıcıya bağlı olarak kesin mikrofon seçimi garanti değildir. En iyi destek için Chrome/Edge kullanın.",
+    "sourceLangAria": "Kaynak dil",
+    "targetLangAria": "Hedef dil"
+  },
+  "actions": {
+    "swap": "Dilleri değiştir",
+    "start": "Başlat",
+    "stop": "Durdur",
+    "replay": "Tekrar oynat",
+    "translate": "Çevir",
+    "read": "Oku"
+  },
+  "placeholders": {
+    "typeText": "Çevirmek için metin yazın",
+    "translation": "Çeviri"
+  }
+}

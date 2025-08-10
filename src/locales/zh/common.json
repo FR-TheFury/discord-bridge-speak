@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "实时多语言语音翻译器 | Neon Gaming",
+    "description": "开口即得实时的转写、翻译与语音合成。"
+  },
+  "header": {
+    "h1": "实时多语言语音翻译器",
+    "subtitle": "自然开口说话。我们会实时转写、翻译并朗读你的消息。"
+  },
+  "buttons": {
+    "startNow": "立即开始",
+    "howItWorks": "如何运作？",
+    "translateInterface": "界面语言"
+  },
+  "comment": {
+    "title": "适用于 Discord 等平台",
+    "text": "在 Discord 通话、游戏或会议期间保持此页面打开。浏览器会捕捉你的语音，在显示字幕的同时朗读译文。"
+  },
+  "panel": {
+    "title": "实时翻译",
+    "voiceToText": "语音 → 文字",
+    "translation": "翻译",
+    "textMode": "文本模式",
+    "result": "结果",
+    "unsupportedWarning": "此浏览器不支持语音识别。请使用下方的文本模式，或在 Chrome/Edge 中使用实时麦克风。",
+    "tip": "提示：在 Discord 通话时保持此面板打开。根据浏览器不同，无法保证严格选择麦克风。为获得最佳支持，请使用 Chrome/Edge。",
+    "sourceLangAria": "源语言",
+    "targetLangAria": "目标语言"
+  },
+  "actions": {
+    "swap": "交换语言",
+    "start": "开始",
+    "stop": "停止",
+    "replay": "重播",
+    "translate": "翻译",
+    "read": "朗读"
+  },
+  "placeholders": {
+    "typeText": "输入要翻译的文本",
+    "translation": "翻译"
+  }
+}

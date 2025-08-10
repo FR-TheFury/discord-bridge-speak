@@ -226,38 +226,38 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
 
         {!recognitionSupported && (
           <div className="rounded-md border border-destructive/50 p-3 text-sm text-muted-foreground bg-destructive/10">
-            La reconnaissance vocale n'est pas supportée par ce navigateur. Utilisez le mode texte ci-dessous, ou essayez Chrome/Edge pour le micro en direct.
+            {t("panel.unsupportedWarning")}
           </div>
         )}
 
         <div className="flex gap-3">
           {!listening ? (
-            <Button variant="neon" onClick={startListening} aria-label="Démarrer" disabled={!recognitionSupported}>
-              <Mic className="opacity-90" /> Démarrer
+            <Button variant="neon" onClick={startListening} aria-label={t("actions.start")} disabled={!recognitionSupported}>
+              <Mic className="opacity-90" /> {t("actions.start")}
             </Button>
           ) : (
-            <Button variant="destructive" onClick={stopAll} aria-label="Arrêter">
-              <Square /> Arrêter
+            <Button variant="destructive" onClick={stopAll} aria-label={t("actions.stop")}>
+              <Square /> {t("actions.stop")}
             </Button>
           )}
           {translated && (
             <Button
               variant="outline"
               onClick={() => speak(translated, tgtLang)}
-              aria-label="Relire la traduction"
+              aria-label={t("actions.replay")}
             >
-              <Volume2 /> Relire
+              <Volume2 /> {t("actions.replay")}
             </Button>
           )}
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-md border p-3 bg-muted/30">
-            <p className="text-xs uppercase text-muted-foreground mb-1">Voix → Texte</p>
+            <p className="text-xs uppercase text-muted-foreground mb-1">{t("panel.voiceToText")}</p>
             <p className="min-h-12 leading-relaxed text-foreground">{(finalTranscript + (interimTranscript ? " " + interimTranscript : "")) || "…"}</p>
           </div>
           <div className="rounded-md border p-3 bg-muted/30">
-            <p className="text-xs uppercase text-muted-foreground mb-1">Traduction</p>
+            <p className="text-xs uppercase text-muted-foreground mb-1">{t("panel.translation")}</p>
             <p className="min-h-12 leading-relaxed text-foreground">{translated || "…"}</p>
           </div>
         </div>
@@ -265,21 +265,21 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
         {/* Text mode fallback */}
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <p className="text-xs uppercase text-muted-foreground">Mode texte</p>
-            <Textarea value={manualIn} onChange={(e) => setManualIn(e.target.value)} placeholder="Saisissez un texte à traduire" />
+            <p className="text-xs uppercase text-muted-foreground">{t("panel.textMode")}</p>
+            <Textarea value={manualIn} onChange={(e) => setManualIn(e.target.value)} placeholder={t("placeholders.typeText") ?? ""} />
             <div className="flex gap-2">
-              <Button size="sm" variant="secondary" onClick={doManualTranslate}>Traduire</Button>
-              <Button size="sm" variant="outline" onClick={() => speak(manualOut || manualIn, tgtLang)} disabled={!(manualOut || manualIn)}>Lire</Button>
+              <Button size="sm" variant="secondary" onClick={doManualTranslate}>{t("actions.translate")}</Button>
+              <Button size="sm" variant="outline" onClick={() => speak(manualOut || manualIn, tgtLang)} disabled={!(manualOut || manualIn)}>{t("actions.read")}</Button>
             </div>
           </div>
           <div className="space-y-2">
-            <p className="text-xs uppercase text-muted-foreground">Résultat</p>
-            <Textarea value={manualOut} onChange={(e) => setManualOut(e.target.value)} placeholder="Traduction" />
+            <p className="text-xs uppercase text-muted-foreground">{t("panel.result")}</p>
+            <Textarea value={manualOut} onChange={(e) => setManualOut(e.target.value)} placeholder={t("placeholders.translation") ?? ""} />
           </div>
         </div>
 
         <p className="text-xs text-muted-foreground">
-          Astuce: laissez ce panneau ouvert pendant votre appel Discord; selon le navigateur, le choix strict du micro n'est pas garanti. Pour le meilleur support, utilisez Chrome/Edge.
+          {t("panel.tip")}
         </p>
       </CardContent>
       <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden>

@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "Live-Multisprach-Sprachübersetzer | Neon Gaming",
+    "description": "Sprechen und in Echtzeit Transkription, Übersetzung und Sprachausgabe erhalten."
+  },
+  "header": {
+    "h1": "Live mehrsprachiger Sprachübersetzer",
+    "subtitle": "Sprich natürlich. Wir transkribieren, übersetzen und lesen deine Nachricht in Echtzeit."
+  },
+  "buttons": {
+    "startNow": "Jetzt starten",
+    "howItWorks": "Wie funktioniert es?",
+    "translateInterface": "Interface-Sprache"
+  },
+  "comment": {
+    "title": "Funktioniert mit Discord und mehr",
+    "text": "Lass diese Seite während deiner Discord-Anrufe, Spiele oder Meetings geöffnet. Dein Browser erfasst deine Stimme und liest die Übersetzung vor, während Untertitel angezeigt werden."
+  },
+  "panel": {
+    "title": "Live-Übersetzung",
+    "voiceToText": "Sprache → Text",
+    "translation": "Übersetzung",
+    "textMode": "Textmodus",
+    "result": "Ergebnis",
+    "unsupportedWarning": "Spracherkennung wird von diesem Browser nicht unterstützt. Verwende unten den Textmodus oder probiere Chrome/Edge für das Live-Mikrofon.",
+    "tip": "Tipp: Lass dieses Panel während deines Discord-Anrufs geöffnet. Je nach Browser ist die strikte Mikrofonauswahl nicht garantiert. Für beste Unterstützung nutze Chrome/Edge.",
+    "sourceLangAria": "Ausgangssprache",
+    "targetLangAria": "Zielsprache"
+  },
+  "actions": {
+    "swap": "Sprachen tauschen",
+    "start": "Start",
+    "stop": "Stopp",
+    "replay": "Nochmal abspielen",
+    "translate": "Übersetzen",
+    "read": "Vorlesen"
+  },
+  "placeholders": {
+    "typeText": "Text zum Übersetzen eingeben",
+    "translation": "Übersetzung"
+  }
+}

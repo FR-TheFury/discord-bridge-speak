@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "リアルタイム多言語音声翻訳 | Neon Gaming",
+    "description": "話すだけで、リアルタイムに文字起こし・翻訳・音声読み上げ。"
+  },
+  "header": {
+    "h1": "リアルタイム多言語音声翻訳",
+    "subtitle": "自然に話してください。あなたのメッセージをリアルタイムで文字起こし・翻訳・読み上げします。"
+  },
+  "buttons": {
+    "startNow": "今すぐ開始",
+    "howItWorks": "使い方",
+    "translateInterface": "インターフェース言語"
+  },
+  "comment": {
+    "title": "Discord などで動作",
+    "text": "Discord 通話、ゲーム、会議中はこのページを開いたままにしてください。ブラウザが音声を取得し、字幕を表示しながら翻訳を読み上げます。"
+  },
+  "panel": {
+    "title": "ライブ翻訳",
+    "voiceToText": "音声 → 文字",
+    "translation": "翻訳",
+    "textMode": "テキストモード",
+    "result": "結果",
+    "unsupportedWarning": "このブラウザは音声認識をサポートしていません。下のテキストモードを使用するか、Chrome/Edge をお試しください。",
+    "tip": "ヒント：Discord 通話中はこのパネルを開いたままにしてください。ブラウザによっては厳密なマイク選択が保証されません。最もサポートが良いのは Chrome/Edge です。",
+    "sourceLangAria": "入力言語",
+    "targetLangAria": "出力言語"
+  },
+  "actions": {
+    "swap": "言語を入れ替え",
+    "start": "開始",
+    "stop": "停止",
+    "replay": "もう一度再生",
+    "translate": "翻訳",
+    "read": "読み上げ"
+  },
+  "placeholders": {
+    "typeText": "翻訳するテキストを入力",
+    "translation": "翻訳"
+  }
+}

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TranslatorPanel } from "@/components/TranslatorPanel";
 import { NeonBubbles } from "@/components/NeonBubbles";
 import { Helmet } from "react-helmet-async";
@@ -7,7 +8,10 @@ import { useTranslation } from "react-i18next";
 import { setUiLanguage } from "@/i18n";
 const Index = () => {
   const { t, i18n } = useTranslation();
-  const toggleUiLang = () => setUiLanguage(i18n.language?.startsWith("fr") ? "en" : "fr");
+  const uiLangs = ["fr","en","es","de","it","pt","ru","zh","ja","ar","tr"];
+  const currentUi = (i18n.language || "fr").split("-")[0];
+  const display = typeof Intl !== "undefined" && "DisplayNames" in Intl ? new Intl.DisplayNames([currentUi], { type: "language" }) : null;
+  const labelFor = (code: string) => (display?.of(code) || ({ fr:"Français", en:"English", es:"Español", de:"Deutsch", it:"Italiano", pt:"Português", ru:"Русский", zh:"中文", ja:"日本語", ar:"العربية", tr:"Türkçe" } as Record<string,string>)[code] || code);
   return (
     <main className="min-h-screen neon-bg relative overflow-hidden">
       <Helmet>
@@ -32,9 +36,16 @@ const Index = () => {
             <Button variant="secondary" asChild>
               <a href="#comment">{t("buttons.howItWorks")}</a>
             </Button>
-            <Button variant="outline" onClick={toggleUiLang}>
-              {t("buttons.translateInterface")}
-            </Button>
+            <Select value={currentUi} onValueChange={(v) => setUiLanguage(v)}>
+              <SelectTrigger aria-label={t("buttons.translateInterface")}>
+                <SelectValue placeholder={t("buttons.translateInterface")} />
+              </SelectTrigger>
+              <SelectContent className="max-h-72">
+                {uiLangs.map((c) => (
+                  <SelectItem key={c} value={c}>{labelFor(c)}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <SettingsSheet />
           </div>
         </div>

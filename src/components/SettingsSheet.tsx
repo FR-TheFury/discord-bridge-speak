@@ -14,17 +14,7 @@ import { toast } from "@/hooks/use-toast";
 export function SettingsSheet() {
   const { state, set } = useSettings();
   const { inputs, outputs, refresh } = useAudioDevices();
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    const loadVoices = () => setVoices(window.speechSynthesis?.getVoices?.() || []);
-    loadVoices();
-    window.speechSynthesis?.addEventListener?.("voiceschanged", loadVoices);
-    return () => window.speechSynthesis?.removeEventListener?.("voiceschanged", loadVoices);
-  }, []);
-
-  const selectedVoice = useMemo(() => voices.find(v => v.voiceURI === state.tts.voiceURI) || null, [voices, state.tts.voiceURI]);
 
   const testOutput = async () => {
     try {
@@ -42,15 +32,6 @@ export function SettingsSheet() {
     }
   };
 
-  const previewVoice = () => {
-    if (!("speechSynthesis" in window)) return;
-    const u = new SpeechSynthesisUtterance("Test de voix. Hello! Ceci est un aperçu.");
-    const v = selectedVoice || voices.find(v => v.lang?.toLowerCase().startsWith("fr")) || voices[0];
-    if (v) u.voice = v;
-    u.rate = state.tts.rate; u.pitch = state.tts.pitch; u.volume = state.tts.volume;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
-  };
 
   return (
     <Sheet>
@@ -112,17 +93,6 @@ export function SettingsSheet() {
               <Switch checked={state.tts.autoSpeak} onCheckedChange={(b) => set({ tts: { autoSpeak: b } as any })} />
             </div>
 
-            <div className="space-y-2">
-              <Label>Voix</Label>
-              <Select value={state.tts.voiceURI ?? ""} onValueChange={(v) => set({ tts: { voiceURI: v || null } as any })}>
-                <SelectTrigger><SelectValue placeholder="Voix du système" /></SelectTrigger>
-                <SelectContent className="max-h-72">
-                  {voices.map((v) => (
-                    <SelectItem key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
 
             <div className="space-y-2">
               <Label>Vitesse</Label>
@@ -136,7 +106,7 @@ export function SettingsSheet() {
               <Label>Volume</Label>
               <Slider min={0} max={1} step={0.05} defaultValue={[state.tts.volume]} onValueChange={([val]) => set({ tts: { volume: val } as any })} />
             </div>
-            <Button onClick={previewVoice}>Aperçu</Button>
+            
           </TabsContent>
         </Tabs>
 
