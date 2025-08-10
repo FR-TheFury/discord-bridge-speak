@@ -44,7 +44,8 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
 
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
-  const [transcript, setTranscript] = useState("");
+  const [finalTranscript, setFinalTranscript] = useState("");
+  const [interimTranscript, setInterimTranscript] = useState("");
   const [translated, setTranslated] = useState("");
   const [srcLang, setSrcLang] = useState(sourceLang);
   const [tgtLang, setTgtLang] = useState(targetLang);
@@ -90,17 +91,25 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     rec.interimResults = true;
 
     rec.onresult = async (event: SpeechRecognitionEvent) => {
-      let full = "";
+      let newFinal = "";
+      let newInterim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const chunk = event.results[i][0].transcript;
-        full += chunk + " ";
-        if (event.results[i].isFinal) {
-          const t = await translateText(chunk, toISO2(srcLang), toISO2(tgtLang));
-          setTranslated((prev) => (prev ? prev + " " + t : t));
-          if (t && settings.tts.autoSpeak) speak(t, tgtLang);
+        const res = event.results[i];
+        const chunk = (res[0]?.transcript || "").trim();
+        if (!chunk) continue;
+        if (res.isFinal) {
+          newFinal += (newFinal ? " " : "") + chunk;
+        } else {
+          newInterim += (newInterim ? " " : "") + chunk;
         }
       }
-      setTranscript((prev) => (prev ? prev + " " + full.trim() : full.trim()));
+      if (newFinal) {
+        setFinalTranscript((prev) => (prev ? prev + " " + newFinal : newFinal));
+        const t = await translateText(newFinal, toISO2(srcLang), toISO2(tgtLang));
+        if (t) setTranslated((prev) => (prev ? prev + " " + t : t));
+        if (t && settings.tts.autoSpeak) speak(t, tgtLang);
+      }
+      setInterimTranscript(newInterim);
     };
 
     rec.onerror = (e: any) => {
@@ -109,7 +118,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
       stopAll();
     };
 
-    rec.onend = () => setListening(false);
+    rec.onend = () => { setListening(false); setInterimTranscript(""); };
 
     recognitionRef.current = rec as any;
     rec.start();
@@ -144,6 +153,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     setListening(false);
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
     setSpeaking(false);
+    setInterimTranscript("");
   };
 
   useEffect(() => () => stopAll(), []);
@@ -152,7 +162,8 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     setSrcLang((prev) => {
       const s = tgtLang; setTgtLang(prev); return s;
     });
-    setTranscript("");
+    setFinalTranscript("");
+    setInterimTranscript("");
     setTranslated("");
   };
 
@@ -225,7 +236,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
         <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-md border p-3 bg-muted/30">
             <p className="text-xs uppercase text-muted-foreground mb-1">Voix → Texte</p>
-            <p className="min-h-12 leading-relaxed text-foreground">{transcript || "…"}</p>
+            <p className="min-h-12 leading-relaxed text-foreground">{(finalTranscript + (interimTranscript ? " " + interimTranscript : "")) || "…"}</p>
           </div>
           <div className="rounded-md border p-3 bg-muted/30">
             <p className="text-xs uppercase text-muted-foreground mb-1">Traduction</p>
