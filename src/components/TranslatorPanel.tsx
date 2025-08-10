@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { Mic, Square, Volume2 } from "lucide-react";
+import { useSettings } from "@/state/SettingsProvider";
+
 
 // Minimal typings for Web Speech API to satisfy TypeScript
 declare global {
@@ -124,7 +126,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
   useEffect(() => () => stopAll(), []);
 
   return (
-    <Card className="relative overflow-hidden shadow-[var(--shadow-elegant)]">
+    <Card className="relative overflow-hidden card-neon animate-enter">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>{title}</span>

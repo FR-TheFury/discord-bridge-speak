@@ -3,10 +3,10 @@ import { TranslatorPanel } from "@/components/TranslatorPanel";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background gaming-bg">
       <header className="container py-12 md:py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        <div className="mx-auto max-w-4xl text-center animate-enter">
+          <h1 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-gaming text-glow">
             Traducteur vocal en direct FR ↔ EN
           </h1>
           <p className="text-lg text-muted-foreground mb-6">

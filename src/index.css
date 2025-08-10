@@ -54,6 +54,11 @@ All colors MUST be HSL.
     --shadow-elegant: 0 12px 30px -12px hsl(var(--primary) / 0.35);
     --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
 
+    /* Gaming palette */
+    --gaming-cyan: 188 95% 54%;
+    --gaming-magenta: 312 85% 60%;
+    --gradient-gaming: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gaming-cyan)) 45%, hsl(var(--gaming-magenta)) 100%);
+
     /* Motion */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -103,6 +108,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-ui;
   }
+}
+
+@layer utilities {
+  .bg-gradient-gaming { background-image: var(--gradient-gaming); }
+  .card-neon { @apply border; background: linear-gradient(180deg, hsl(var(--card)/0.7), hsl(var(--card)/0.4)); backdrop-filter: blur(8px); box-shadow: var(--shadow-elegant), 0 0 0 1px hsl(var(--primary)/0.15) inset; }
+  .text-glow { text-shadow: 0 0 16px hsl(var(--primary)/0.6), 0 0 32px hsl(var(--primary-glow)/0.4); }
+  .gaming-bg { position: relative; isolation: isolate; }
+  .gaming-bg::after { content: ""; position: absolute; inset: -20%; z-index: -1; background: radial-gradient(600px 300px at 20% 10%, hsl(var(--gaming-cyan)/0.15), transparent 60%), radial-gradient(600px 300px at 80% 10%, hsl(var(--gaming-magenta)/0.12), transparent 60%); filter: blur(20px); }
 }
