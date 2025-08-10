@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { TranslatorPanel } from "@/components/TranslatorPanel";
 import { NeonBubbles } from "@/components/NeonBubbles";
 import { Helmet } from "react-helmet-async";
+import { SettingsSheet } from "@/components/SettingsSheet";
 
 const Index = () => {
   return (
@@ -27,6 +28,7 @@ const Index = () => {
             <Button variant="secondary" asChild>
               <a href="#comment">Comment ça marche ?</a>
             </Button>
+            <SettingsSheet />
           </div>
         </div>
       </header>
