@@ -7,7 +7,9 @@ import { useSettings } from "@/state/SettingsProvider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { POPULAR_LANGUAGES, toISO2 } from "@/data/languages";
+import { useTranslation } from "react-i18next";
 
+// Minimal typings for Web Speech API to satisfy TypeScript
 // Minimal typings for Web Speech API to satisfy TypeScript
 declare global {
   interface Window {
@@ -41,7 +43,7 @@ async function translateText(text: string, fromISO2: string, toISO2: string) {
 
 export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPanelProps) {
   const { state: settings } = useSettings();
-
+  const { t } = useTranslation();
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [finalTranscript, setFinalTranscript] = useState("");
@@ -129,22 +131,38 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     if (!("speechSynthesis" in window)) return;
     const u = new SpeechSynthesisUtterance(text);
     u.lang = lang;
-    // Apply voice selection and params
-    try {
-      const voices = window.speechSynthesis.getVoices?.() || [];
-      const selected = voices.find((v) => v.voiceURI === settings.tts.voiceURI)
-        || voices.find((v) => v.lang?.toLowerCase() === lang.toLowerCase())
-        || voices.find((v) => v.lang?.toLowerCase().startsWith(lang.split("-")[0].toLowerCase()))
-        || voices[0];
-      if (selected) u.voice = selected;
-    } catch {}
-    u.rate = settings.tts.rate;
-    u.pitch = settings.tts.pitch;
-    u.volume = settings.tts.volume;
-    u.onstart = () => setSpeaking(true);
-    u.onend = () => setSpeaking(false);
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
+
+    const assignAndSpeak = () => {
+      try {
+        const voices = window.speechSynthesis.getVoices?.() || [];
+        const langLower = lang.toLowerCase();
+        const base = langLower.split("-")[0];
+        const exact = voices.filter((v) => v.lang?.toLowerCase() === langLower);
+        const partial = voices.filter((v) => v.lang?.toLowerCase().startsWith(base));
+        const prefer = (arr: SpeechSynthesisVoice[]) => arr.find((v) => /google|microsoft/i.test(v.name)) || arr[0];
+        const chosen = prefer(exact) || prefer(partial) || voices[0];
+        if (chosen) u.voice = chosen;
+      } catch {}
+      u.rate = settings.tts.rate;
+      u.pitch = settings.tts.pitch;
+      u.volume = settings.tts.volume;
+      u.onstart = () => setSpeaking(true);
+      u.onend = () => setSpeaking(false);
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    };
+
+    const existing = window.speechSynthesis.getVoices?.() || [];
+    if (!existing.length) {
+      const once = () => {
+        window.speechSynthesis.removeEventListener?.("voiceschanged", once as any);
+        assignAndSpeak();
+      };
+      window.speechSynthesis.addEventListener?.("voiceschanged", once as any);
+      window.speechSynthesis.getVoices?.();
+    } else {
+      assignAndSpeak();
+    }
   };
 
   const stopAll = () => {
@@ -186,18 +204,18 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
       <CardContent className="space-y-4">
         <div className="grid grid-cols-[1fr_auto_1fr] gap-2">
           <Select value={srcLang} onValueChange={(v) => setSrcLang(v)}>
-            <SelectTrigger aria-label="Langue source"><SelectValue placeholder="Source" /></SelectTrigger>
+            <SelectTrigger aria-label={t("panel.sourceLangAria")}><SelectValue placeholder={t("panel.sourceLangAria")} /></SelectTrigger>
             <SelectContent className="max-h-72">
               {POPULAR_LANGUAGES.map((l) => (
                 <SelectItem key={l.bcp47} value={l.bcp47}>{l.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <Button variant="ghost" aria-label="Inverser les langues" onClick={swapLangs}>
+          <Button variant="ghost" aria-label={t("actions.swap")} onClick={swapLangs}>
             <ArrowLeftRight />
           </Button>
           <Select value={tgtLang} onValueChange={(v) => setTgtLang(v)}>
-            <SelectTrigger aria-label="Langue cible"><SelectValue placeholder="Cible" /></SelectTrigger>
+            <SelectTrigger aria-label={t("panel.targetLangAria")}><SelectValue placeholder={t("panel.targetLangAria")} /></SelectTrigger>
             <SelectContent className="max-h-72">
               {POPULAR_LANGUAGES.map((l) => (
                 <SelectItem key={l.bcp47} value={l.bcp47}>{l.label}</SelectItem>

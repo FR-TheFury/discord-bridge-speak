@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "Traducteur vocal multilingue en direct | Néon Gaming",
+    "description": "Parlez, on transcrit, traduit et lit en temps réel entre plusieurs langues."
+  },
+  "header": {
+    "h1": "Traducteur vocal en direct multilingue",
+    "subtitle": "Parlez naturellement. Nous transcrivons, traduisons et lisons votre message en temps réel."
+  },
+  "buttons": {
+    "startNow": "Démarrer maintenant",
+    "howItWorks": "Comment ça marche ?",
+    "translateInterface": "Traduire l’interface"
+  },
+  "comment": {
+    "title": "Fonctionne avec Discord et autres",
+    "text": "Laissez cette page ouverte pendant vos appels Discord, jeux ou réunions. Le micro du navigateur capte votre voix et lit la traduction dans la langue cible tout en affichant des sous-titres."
+  },
+  "panel": {
+    "title": "Traduction en direct",
+    "voiceToText": "Voix → Texte",
+    "translation": "Traduction",
+    "textMode": "Mode texte",
+    "result": "Résultat",
+    "unsupportedWarning": "La reconnaissance vocale n'est pas supportée par ce navigateur. Utilisez le mode texte ci-dessous, ou essayez Chrome/Edge pour le micro en direct.",
+    "tip": "Astuce: laissez ce panneau ouvert pendant votre appel Discord; selon le navigateur, le choix strict du micro n'est pas garanti. Pour le meilleur support, utilisez Chrome/Edge.",
+    "sourceLangAria": "Langue source",
+    "targetLangAria": "Langue cible"
+  },
+  "actions": {
+    "swap": "Inverser les langues",
+    "start": "Démarrer",
+    "stop": "Arrêter",
+    "replay": "Relire",
+    "translate": "Traduire",
+    "read": "Lire"
+  },
+  "placeholders": {
+    "typeText": "Saisissez un texte à traduire",
+    "translation": "Traduction"
+  }
+}

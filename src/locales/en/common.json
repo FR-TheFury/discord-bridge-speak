@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "Live Multilingual Voice Translator | Neon Gaming",
+    "description": "Speak and get real‑time transcription, translation and speech across languages."
+  },
+  "header": {
+    "h1": "Live multilingual voice translator",
+    "subtitle": "Speak naturally. We transcribe, translate and read your message in real time."
+  },
+  "buttons": {
+    "startNow": "Start now",
+    "howItWorks": "How it works?",
+    "translateInterface": "Translate interface"
+  },
+  "comment": {
+    "title": "Works with Discord and more",
+    "text": "Keep this page open during your Discord calls, games or meetings. Your browser captures your voice and reads the translation while displaying subtitles."
+  },
+  "panel": {
+    "title": "Live translation",
+    "voiceToText": "Voice → Text",
+    "translation": "Translation",
+    "textMode": "Text mode",
+    "result": "Result",
+    "unsupportedWarning": "Speech recognition is not supported by this browser. Use the text mode below, or try Chrome/Edge for live mic.",
+    "tip": "Tip: keep this panel open during your Discord call. Depending on the browser, strict mic selection is not guaranteed. For best support, use Chrome/Edge.",
+    "sourceLangAria": "Source language",
+    "targetLangAria": "Target language"
+  },
+  "actions": {
+    "swap": "Swap languages",
+    "start": "Start",
+    "stop": "Stop",
+    "replay": "Replay",
+    "translate": "Translate",
+    "read": "Read"
+  },
+  "placeholders": {
+    "typeText": "Type text to translate",
+    "translation": "Translation"
+  }
+}
