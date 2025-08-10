@@ -1,10 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { TranslatorPanel } from "@/components/TranslatorPanel";
 import { NeonBubbles } from "@/components/NeonBubbles";
+import { Helmet } from "react-helmet-async";
 
 const Index = () => {
   return (
     <main className="min-h-screen neon-bg relative overflow-hidden">
+      <Helmet>
+        <title>Traducteur vocal FR ↔ EN | Néon Gaming</title>
+        <meta name="description" content="Traducteur vocal en direct FR ↔ EN avec effets néon gaming. Parlez, on transcrit, traduit et lit en temps réel." />
+        <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : "/"} />
+      </Helmet>
       <NeonBubbles />
       <header className="container py-12 md:py-16">
         <div className="mx-auto max-w-4xl text-center animate-enter">
