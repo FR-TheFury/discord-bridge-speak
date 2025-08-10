@@ -57,7 +57,9 @@ All colors MUST be HSL.
     /* Gaming palette */
     --gaming-cyan: 188 95% 54%;
     --gaming-magenta: 312 85% 60%;
+    --gaming-lime: 150 95% 55%;
     --gradient-gaming: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gaming-cyan)) 45%, hsl(var(--gaming-magenta)) 100%);
+    --gradient-neon: linear-gradient(135deg, hsl(var(--gaming-cyan)) 0%, hsl(var(--primary)) 40%, hsl(var(--gaming-magenta)) 70%, hsl(var(--gaming-lime)) 100%);
 
     /* Motion */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -118,4 +120,41 @@ All colors MUST be HSL.
   .text-glow { text-shadow: 0 0 16px hsl(var(--primary)/0.6), 0 0 32px hsl(var(--primary-glow)/0.4); }
   .gaming-bg { position: relative; isolation: isolate; }
   .gaming-bg::after { content: ""; position: absolute; inset: -20%; z-index: -1; background: radial-gradient(600px 300px at 20% 10%, hsl(var(--gaming-cyan)/0.15), transparent 60%), radial-gradient(600px 300px at 80% 10%, hsl(var(--gaming-magenta)/0.12), transparent 60%); filter: blur(20px); }
+
+  /* New Neon Background: animated gradient + soft radial glows */
+  .neon-bg { position: relative; background: radial-gradient(800px 400px at 15% -5%, hsl(var(--gaming-cyan)/0.10), transparent 60%), radial-gradient(900px 450px at 85% -10%, hsl(var(--gaming-magenta)/0.08), transparent 60%), linear-gradient(180deg, hsl(var(--background)), hsl(var(--background))); }
+  .neon-bg::before { content: ""; position: absolute; inset: -25%; z-index: 0; background-image: var(--gradient-neon); background-size: 200% 200%; opacity: 0.25; filter: blur(30px); animation: gradient-shift 22s ease-in-out infinite alternate; }
+
+  /* Neon text gradient + glow */
+  .neon-text { color: transparent; background-image: var(--gradient-neon); -webkit-background-clip: text; background-clip: text; text-shadow: 0 0 24px hsl(var(--primary)/0.5), 0 0 50px hsl(var(--primary-glow)/0.35); }
+
+  /* Neon cards */
+  .neon-card { @apply border; background: linear-gradient(180deg, hsl(var(--card)/0.6), hsl(var(--card)/0.35)); backdrop-filter: blur(10px); box-shadow: var(--shadow-elegant), 0 0 0 1px hsl(var(--primary)/0.25) inset, 0 10px 40px -10px hsl(var(--primary)/0.25); }
+
+  /* Bubbles layer */
+  .neon-bubbles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .neon-bubbles .bubble { position: absolute; bottom: -20vh; border-radius: 9999px; filter: blur(10px); mix-blend-mode: screen; opacity: 0.55; animation: float-bubble 28s linear infinite; }
+  .neon-bubbles .bubble.cyan { background: radial-gradient(circle at 30% 30%, hsl(var(--gaming-cyan)/0.35), transparent 70%); box-shadow: 0 0 140px hsl(var(--gaming-cyan)/0.25); }
+  .neon-bubbles .bubble.magenta { background: radial-gradient(circle at 30% 30%, hsl(var(--gaming-magenta)/0.35), transparent 70%); box-shadow: 0 0 140px hsl(var(--gaming-magenta)/0.25); }
+  .neon-bubbles .bubble.primary { background: radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.35), transparent 70%); box-shadow: 0 0 140px hsl(var(--primary)/0.25); }
+  .neon-bubbles .bubble.lime { background: radial-gradient(circle at 30% 30%, hsl(var(--gaming-lime)/0.35), transparent 70%); box-shadow: 0 0 140px hsl(var(--gaming-lime)/0.25); }
+}
+
+/* Neon animations */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-bubble {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.6; }
+  50% { transform: translateY(-55vh) translateX(10vw) scale(1.05); }
+  100% { transform: translateY(-120vh) translateX(-5vw) scale(1.1); opacity: 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 10px hsl(var(--primary)/0.35)); }
+  50% { filter: drop-shadow(0 0 25px hsl(var(--primary-glow)/0.5)); }
 }

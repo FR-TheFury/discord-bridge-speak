@@ -126,7 +126,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
   useEffect(() => () => stopAll(), []);
 
   return (
-    <Card className="relative overflow-hidden card-neon animate-enter">
+    <Card className="relative overflow-hidden neon-card animate-enter">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>{title}</span>
@@ -138,7 +138,7 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
       <CardContent className="space-y-4">
         <div className="flex gap-3">
           {!listening ? (
-            <Button variant="hero" onClick={startListening} aria-label="Démarrer">
+            <Button variant="neon" onClick={startListening} aria-label="Démarrer">
               <Mic className="opacity-90" /> Démarrer
             </Button>
           ) : (
