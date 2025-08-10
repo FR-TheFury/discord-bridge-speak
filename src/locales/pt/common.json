@@ -27,13 +27,33 @@
     "sourceLangAria": "Idioma de origem",
     "targetLangAria": "Idioma de destino"
   },
+  "settings": {
+    "open": "Configurações",
+    "title": "Configurações",
+    "description": "Configure o áudio e a síntese de voz.",
+    "tabs": { "audio": "Áudio", "voice": "Voz" },
+    "mic": "Microfone",
+    "micPlaceholder": "Selecione um microfone",
+    "output": "Saída de áudio",
+    "outputPlaceholder": "Padrão do sistema",
+    "testOutput": "Testar saída",
+    "refresh": "Atualizar",
+    "note": "Observação: o reconhecimento de voz do navegador pode não permitir a seleção rigorosa do microfone. Selecionar aqui ajuda a conceder permissão ao dispositivo correto.",
+    "autoSpeak": "Reprodução automática",
+    "autoSpeakDesc": "Ler a tradução automaticamente.",
+    "rate": "Velocidade",
+    "pitch": "Tom",
+    "volume": "Volume",
+    "outputTestFailed": "Não foi possível reproduzir o som nesta saída."
+  },
   "actions": {
     "swap": "Trocar idiomas",
     "start": "Iniciar",
     "stop": "Parar",
     "replay": "Reproduzir",
     "translate": "Traduzir",
-    "read": "Ler"
+    "read": "Ler",
+    "clear": "Limpar"
   },
   "placeholders": {
     "typeText": "Digite o texto para traduzir",

@@ -27,13 +27,33 @@
     "sourceLangAria": "Kaynak dil",
     "targetLangAria": "Hedef dil"
   },
+  "settings": {
+    "open": "Ayarlar",
+    "title": "Ayarlar",
+    "description": "Sesi ve metin okuma ayarlarını yapın.",
+    "tabs": { "audio": "Ses", "voice": "Seslendirme" },
+    "mic": "Mikrofon",
+    "micPlaceholder": "Bir mikrofon seçin",
+    "output": "Ses çıkışı",
+    "outputPlaceholder": "Sistem varsayılanı",
+    "testOutput": "Çıkışı test et",
+    "refresh": "Yenile",
+    "note": "Not: Tarayıcı konuşma tanıma özelliği kesin mikrofon seçimine izin vermeyebilir. Buradan seçim yapmak doğru cihaza izin vermeye yardımcı olur.",
+    "autoSpeak": "Otomatik oynat",
+    "autoSpeakDesc": "Çeviriyi otomatik olarak oku.",
+    "rate": "Hız",
+    "pitch": "Perde",
+    "volume": "Ses düzeyi",
+    "outputTestFailed": "Bu çıkışta ses çalınamadı."
+  },
   "actions": {
     "swap": "Dilleri değiştir",
     "start": "Başlat",
     "stop": "Durdur",
     "replay": "Tekrar oynat",
     "translate": "Çevir",
-    "read": "Oku"
+    "read": "Oku",
+    "clear": "Temizle"
   },
   "placeholders": {
     "typeText": "Çevirmek için metin yazın",

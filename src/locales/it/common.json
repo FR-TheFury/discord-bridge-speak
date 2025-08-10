@@ -27,13 +27,33 @@
     "sourceLangAria": "Lingua sorgente",
     "targetLangAria": "Lingua di destinazione"
   },
+  "settings": {
+    "open": "Impostazioni",
+    "title": "Impostazioni",
+    "description": "Configura audio e sintesi vocale.",
+    "tabs": { "audio": "Audio", "voice": "Voce" },
+    "mic": "Microfono",
+    "micPlaceholder": "Seleziona un microfono",
+    "output": "Uscita audio",
+    "outputPlaceholder": "Predefinito di sistema",
+    "testOutput": "Prova uscita",
+    "refresh": "Aggiorna",
+    "note": "Nota: il riconoscimento vocale del browser potrebbe non consentire la scelta rigorosa del microfono. La selezione qui aiuta a concedere il permesso al dispositivo corretto.",
+    "autoSpeak": "Riproduzione automatica",
+    "autoSpeakDesc": "Leggi automaticamente la traduzione.",
+    "rate": "Velocità",
+    "pitch": "Timbro",
+    "volume": "Volume",
+    "outputTestFailed": "Impossibile riprodurre l'audio su questa uscita."
+  },
   "actions": {
     "swap": "Inverti lingue",
     "start": "Avvia",
     "stop": "Stop",
     "replay": "Riascolta",
     "translate": "Traduci",
-    "read": "Leggi"
+    "read": "Leggi",
+    "clear": "Pulisci"
   },
   "placeholders": {
     "typeText": "Digita testo da tradurre",

@@ -10,9 +10,11 @@ import { useAudioDevices } from "@/hooks/use-audio-devices";
 import { useSettings } from "@/state/SettingsProvider";
 import { Settings } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 export function SettingsSheet() {
   const { state, set } = useSettings();
+  const { t } = useTranslation();
   const { inputs, outputs, refresh } = useAudioDevices();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -28,7 +30,7 @@ export function SettingsSheet() {
       }
       await el.play();
     } catch (e) {
-      toast({ title: "Test sortie", description: "Impossible de jouer le son sur cette sortie." });
+      toast({ title: t("settings.testOutput"), description: t("settings.outputTestFailed") });
     }
   };
 
@@ -36,25 +38,25 @@ export function SettingsSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" className="hover-scale"><Settings className="mr-2 h-4 w-4" /> Paramètres</Button>
+        <Button variant="outline" className="hover-scale"><Settings className="mr-2 h-4 w-4" /> {t("settings.open")}</Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full sm:max-w-md">
         <SheetHeader>
-          <SheetTitle>Paramètres</SheetTitle>
-          <SheetDescription>Configurez votre audio et la synthèse vocale.</SheetDescription>
+          <SheetTitle>{t("settings.title")}</SheetTitle>
+          <SheetDescription>{t("settings.description")}</SheetDescription>
         </SheetHeader>
 
         <Tabs defaultValue="audio" className="mt-4">
           <TabsList className="grid grid-cols-2">
-            <TabsTrigger value="audio">Audio</TabsTrigger>
-            <TabsTrigger value="voice">Voix</TabsTrigger>
+            <TabsTrigger value="audio">{t("settings.tabs.audio")}</TabsTrigger>
+            <TabsTrigger value="voice">{t("settings.tabs.voice")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="audio" className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label>Microphone</Label>
+              <Label>{t("settings.mic")}</Label>
               <Select value={state.audio.inputId ?? ""} onValueChange={(v) => set({ audio: { inputId: v || null } as any })}>
-                <SelectTrigger><SelectValue placeholder="Sélectionnez un micro" /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder={t("settings.micPlaceholder") ?? ""} /></SelectTrigger>
                 <SelectContent>
                   {inputs.map((d) => (
                     <SelectItem key={d.deviceId} value={d.deviceId}>{d.label || "Micro"}</SelectItem>
@@ -64,9 +66,9 @@ export function SettingsSheet() {
             </div>
 
             <div className="space-y-2">
-              <Label>Sortie audio</Label>
+              <Label>{t("settings.output")}</Label>
               <Select value={state.audio.outputId ?? ""} onValueChange={(v) => set({ audio: { outputId: v || null } as any })}>
-                <SelectTrigger><SelectValue placeholder="Par défaut du système" /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder={t("settings.outputPlaceholder") ?? ""} /></SelectTrigger>
                 <SelectContent>
                   {outputs.map((d) => (
                     <SelectItem key={d.deviceId} value={d.deviceId}>{d.label || "Sortie"}</SelectItem>
@@ -74,36 +76,36 @@ export function SettingsSheet() {
                 </SelectContent>
               </Select>
               <div className="flex gap-2">
-                <Button variant="secondary" onClick={testOutput}>Tester la sortie</Button>
-                <Button variant="ghost" onClick={refresh}>Actualiser</Button>
+                <Button variant="secondary" onClick={testOutput}>{t("settings.testOutput")}</Button>
+                <Button variant="ghost" onClick={refresh}>{t("settings.refresh")}</Button>
               </div>
             </div>
 
             <p className="text-xs text-muted-foreground">
-              Note: la reconnaissance vocale du navigateur n'autorise pas le choix strict du micro. Sélectionner un micro ici aide à donner la permission au bon appareil.
+              {t("settings.note")}
             </p>
           </TabsContent>
 
           <TabsContent value="voice" className="space-y-4 mt-4">
             <div className="flex items-center justify-between">
               <div>
-                <Label>Lecture automatique</Label>
-                <p className="text-xs text-muted-foreground">Lire la traduction automatiquement.</p>
+                <Label>{t("settings.autoSpeak")}</Label>
+                <p className="text-xs text-muted-foreground">{t("settings.autoSpeakDesc")}</p>
               </div>
               <Switch checked={state.tts.autoSpeak} onCheckedChange={(b) => set({ tts: { autoSpeak: b } as any })} />
             </div>
 
 
             <div className="space-y-2">
-              <Label>Vitesse</Label>
+              <Label>{t("settings.rate")}</Label>
               <Slider min={0.5} max={2} step={0.1} defaultValue={[state.tts.rate]} onValueChange={([val]) => set({ tts: { rate: val } as any })} />
             </div>
             <div className="space-y-2">
-              <Label>Timbre</Label>
+              <Label>{t("settings.pitch")}</Label>
               <Slider min={0} max={2} step={0.1} defaultValue={[state.tts.pitch]} onValueChange={([val]) => set({ tts: { pitch: val } as any })} />
             </div>
             <div className="space-y-2">
-              <Label>Volume</Label>
+              <Label>{t("settings.volume")}</Label>
               <Slider min={0} max={1} step={0.05} defaultValue={[state.tts.volume]} onValueChange={([val]) => set({ tts: { volume: val } as any })} />
             </div>
             

@@ -27,13 +27,33 @@
     "sourceLangAria": "Source language",
     "targetLangAria": "Target language"
   },
+  "settings": {
+    "open": "Settings",
+    "title": "Settings",
+    "description": "Configure audio and text-to-speech.",
+    "tabs": { "audio": "Audio", "voice": "Voice" },
+    "mic": "Microphone",
+    "micPlaceholder": "Select a microphone",
+    "output": "Audio output",
+    "outputPlaceholder": "System default",
+    "testOutput": "Test output",
+    "refresh": "Refresh",
+    "note": "Note: browser speech recognition may not allow strict mic selection. Selecting here helps grant permission to the right device.",
+    "autoSpeak": "Auto play",
+    "autoSpeakDesc": "Automatically read the translation.",
+    "rate": "Speed",
+    "pitch": "Pitch",
+    "volume": "Volume",
+    "outputTestFailed": "Unable to play sound on this output."
+  },
   "actions": {
     "swap": "Swap languages",
     "start": "Start",
     "stop": "Stop",
     "replay": "Replay",
     "translate": "Translate",
-    "read": "Read"
+    "read": "Read",
+    "clear": "Clear"
   },
   "placeholders": {
     "typeText": "Type text to translate",

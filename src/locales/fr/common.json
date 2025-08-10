@@ -27,13 +27,33 @@
     "sourceLangAria": "Langue source",
     "targetLangAria": "Langue cible"
   },
+  "settings": {
+    "open": "Paramètres",
+    "title": "Paramètres",
+    "description": "Configurez votre audio et la synthèse vocale.",
+    "tabs": { "audio": "Audio", "voice": "Voix" },
+    "mic": "Microphone",
+    "micPlaceholder": "Sélectionnez un micro",
+    "output": "Sortie audio",
+    "outputPlaceholder": "Par défaut du système",
+    "testOutput": "Tester la sortie",
+    "refresh": "Actualiser",
+    "note": "Note: la reconnaissance vocale du navigateur n'autorise pas le choix strict du micro. Sélectionner un micro ici aide à donner la permission au bon appareil.",
+    "autoSpeak": "Lecture automatique",
+    "autoSpeakDesc": "Lire la traduction automatiquement.",
+    "rate": "Vitesse",
+    "pitch": "Timbre",
+    "volume": "Volume",
+    "outputTestFailed": "Impossible de jouer le son sur cette sortie."
+  },
   "actions": {
     "swap": "Inverser les langues",
     "start": "Démarrer",
     "stop": "Arrêter",
     "replay": "Relire",
     "translate": "Traduire",
-    "read": "Lire"
+    "read": "Lire",
+    "clear": "Effacer"
   },
   "placeholders": {
     "typeText": "Saisissez un texte à traduire",

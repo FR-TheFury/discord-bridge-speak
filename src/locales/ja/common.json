@@ -27,13 +27,33 @@
     "sourceLangAria": "入力言語",
     "targetLangAria": "出力言語"
   },
+  "settings": {
+    "open": "設定",
+    "title": "設定",
+    "description": "音声と読み上げを設定します。",
+    "tabs": { "audio": "オーディオ", "voice": "ボイス" },
+    "mic": "マイク",
+    "micPlaceholder": "マイクを選択",
+    "output": "オーディオ出力",
+    "outputPlaceholder": "システム既定",
+    "testOutput": "出力をテスト",
+    "refresh": "更新",
+    "note": "ヒント：ブラウザの音声認識では厳密なマイク選択ができない場合があります。ここで選ぶと正しいデバイスに権限を付与しやすくなります。",
+    "autoSpeak": "自動再生",
+    "autoSpeakDesc": "翻訳を自動で読み上げる。",
+    "rate": "速度",
+    "pitch": "ピッチ",
+    "volume": "音量",
+    "outputTestFailed": "この出力で音声を再生できませんでした。"
+  },
   "actions": {
     "swap": "言語を入れ替え",
     "start": "開始",
     "stop": "停止",
     "replay": "もう一度再生",
     "translate": "翻訳",
-    "read": "読み上げ"
+    "read": "読み上げ",
+    "clear": "クリア"
   },
   "placeholders": {
     "typeText": "翻訳するテキストを入力",

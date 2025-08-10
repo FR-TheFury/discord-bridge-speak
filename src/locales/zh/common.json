@@ -27,13 +27,33 @@
     "sourceLangAria": "源语言",
     "targetLangAria": "目标语言"
   },
+  "settings": {
+    "open": "设置",
+    "title": "设置",
+    "description": "配置音频和语音合成。",
+    "tabs": { "audio": "音频", "voice": "语音" },
+    "mic": "麦克风",
+    "micPlaceholder": "选择一个麦克风",
+    "output": "音频输出",
+    "outputPlaceholder": "系统默认",
+    "testOutput": "测试输出",
+    "refresh": "刷新",
+    "note": "提示：浏览器的语音识别可能无法严格选择麦克风。在此选择有助于为正确的设备授予权限。",
+    "autoSpeak": "自动播放",
+    "autoSpeakDesc": "自动朗读翻译。",
+    "rate": "速度",
+    "pitch": "音调",
+    "volume": "音量",
+    "outputTestFailed": "无法在此输出设备上播放声音。"
+  },
   "actions": {
     "swap": "交换语言",
     "start": "开始",
     "stop": "停止",
     "replay": "重播",
     "translate": "翻译",
-    "read": "朗读"
+    "read": "朗读",
+    "clear": "清空"
   },
   "placeholders": {
     "typeText": "输入要翻译的文本",

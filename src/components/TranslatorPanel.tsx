@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { Mic, Square, Volume2, ArrowLeftRight, Globe } from "lucide-react";
+import { Mic, Square, Volume2, ArrowLeftRight, Globe, Eraser } from "lucide-react";
 import { useSettings } from "@/state/SettingsProvider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -174,6 +174,15 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     setInterimTranscript("");
   };
 
+  const clearAll = () => {
+    stopAll();
+    setFinalTranscript("");
+    setInterimTranscript("");
+    setTranslated("");
+    setManualIn("");
+    setManualOut("");
+  };
+
   useEffect(() => () => stopAll(), []);
 
   const swapLangs = () => {
@@ -247,6 +256,11 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
               aria-label={t("actions.replay")}
             >
               <Volume2 /> {t("actions.replay")}
+            </Button>
+          )}
+          {(finalTranscript || interimTranscript || translated || manualIn || manualOut) && (
+            <Button variant="ghost" onClick={clearAll} aria-label={t("actions.clear")}>
+              <Eraser /> {t("actions.clear")}
             </Button>
           )}
         </div>

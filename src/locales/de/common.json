@@ -27,13 +27,33 @@
     "sourceLangAria": "Ausgangssprache",
     "targetLangAria": "Zielsprache"
   },
+  "settings": {
+    "open": "Einstellungen",
+    "title": "Einstellungen",
+    "description": "Audio und Sprachausgabe konfigurieren.",
+    "tabs": { "audio": "Audio", "voice": "Stimme" },
+    "mic": "Mikrofon",
+    "micPlaceholder": "Mikrofon auswählen",
+    "output": "Audioausgabe",
+    "outputPlaceholder": "Systemstandard",
+    "testOutput": "Ausgabe testen",
+    "refresh": "Aktualisieren",
+    "note": "Hinweis: Die Browser-Spracherkennung erlaubt evtl. keine strikte Mikrofonauswahl. Die Auswahl hier hilft, die Rechte für das richtige Gerät zu erteilen.",
+    "autoSpeak": "Automatisch abspielen",
+    "autoSpeakDesc": "Übersetzung automatisch vorlesen.",
+    "rate": "Geschwindigkeit",
+    "pitch": "Tonhöhe",
+    "volume": "Lautstärke",
+    "outputTestFailed": "Audio auf dieser Ausgabe konnte nicht abgespielt werden."
+  },
   "actions": {
     "swap": "Sprachen tauschen",
     "start": "Start",
     "stop": "Stopp",
     "replay": "Nochmal abspielen",
     "translate": "Übersetzen",
-    "read": "Vorlesen"
+    "read": "Vorlesen",
+    "clear": "Leeren"
   },
   "placeholders": {
     "typeText": "Text zum Übersetzen eingeben",
