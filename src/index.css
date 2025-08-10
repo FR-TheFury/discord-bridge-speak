@@ -123,7 +123,7 @@ All colors MUST be HSL.
 
   /* New Neon Background: animated gradient + soft radial glows */
   .neon-bg { position: relative; background: radial-gradient(800px 400px at 15% -5%, hsl(var(--gaming-cyan)/0.10), transparent 60%), radial-gradient(900px 450px at 85% -10%, hsl(var(--gaming-magenta)/0.08), transparent 60%), linear-gradient(180deg, hsl(var(--background)), hsl(var(--background))); }
-  .neon-bg::before { content: ""; position: absolute; inset: -25%; z-index: 0; background-image: var(--gradient-neon); background-size: 200% 200%; opacity: 0.25; filter: blur(30px); animation: gradient-shift 22s ease-in-out infinite alternate; }
+  .neon-bg::before { content: ""; position: absolute; inset: -25%; z-index: 0; pointer-events: none; background-image: var(--gradient-neon); background-size: 200% 200%; opacity: 0.25; filter: blur(30px); animation: gradient-shift 22s ease-in-out infinite alternate; }
 
   /* Neon text gradient + glow */
   .neon-text { color: transparent; background-image: var(--gradient-neon); -webkit-background-clip: text; background-clip: text; text-shadow: 0 0 24px hsl(var(--primary)/0.5), 0 0 50px hsl(var(--primary-glow)/0.35); }
