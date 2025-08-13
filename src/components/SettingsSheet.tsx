@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -87,6 +88,38 @@ export function SettingsSheet() {
           </TabsContent>
 
           <TabsContent value="voice" className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="tts-method">{t("settings.ttsMethod")}</Label>
+              <Select 
+                value={state.tts.method} 
+                onValueChange={(value: 'elevenlabs' | 'native' | 'disabled') => 
+                  set({ tts: { method: value } as any })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="elevenlabs">ElevenLabs (Premium)</SelectItem>
+                  <SelectItem value="native">Native TTS</SelectItem>
+                  <SelectItem value="disabled">Disabled</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {state.tts.method === 'elevenlabs' && (
+              <div className="space-y-2">
+                <Label htmlFor="elevenlabs-key">{t("settings.elevenlabsApiKey")}</Label>
+                <Input
+                  id="elevenlabs-key"
+                  type="password"
+                  placeholder="sk-..."
+                  value={state.tts.elevenlabsApiKey || ''}
+                  onChange={(e) => set({ tts: { elevenlabsApiKey: e.target.value || null } as any })}
+                />
+              </div>
+            )}
+
             <div className="flex items-center justify-between">
               <div>
                 <Label>{t("settings.autoSpeak")}</Label>
@@ -94,7 +127,6 @@ export function SettingsSheet() {
               </div>
               <Switch checked={state.tts.autoSpeak} onCheckedChange={(b) => set({ tts: { autoSpeak: b } as any })} />
             </div>
-
 
             <div className="space-y-2">
               <Label>{t("settings.rate")}</Label>

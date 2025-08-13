@@ -11,12 +11,14 @@ export type SettingsState = {
     pitch: number;
     volume: number;
     autoSpeak: boolean;
+    method: 'elevenlabs' | 'native' | 'disabled';
+    elevenlabsApiKey: string | null;
   };
 };
 
 const defaultState: SettingsState = {
   audio: { inputId: null, outputId: null },
-  tts: { voiceURI: null, rate: 1, pitch: 1, volume: 1, autoSpeak: true },
+  tts: { voiceURI: null, rate: 1, pitch: 1, volume: 1, autoSpeak: true, method: 'native', elevenlabsApiKey: null },
 };
 
 type Action = { type: "SET"; payload: Partial<SettingsState> };

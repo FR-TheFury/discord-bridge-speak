@@ -6,8 +6,10 @@ import { Mic, Square, Volume2, ArrowLeftRight, Globe, Eraser } from "lucide-reac
 import { useSettings } from "@/state/SettingsProvider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { POPULAR_LANGUAGES, toISO2 } from "@/data/languages";
+import { toISO2 } from "@/data/languages";
 import { useTranslation } from "react-i18next";
+import { useTranslatedLanguages } from "@/hooks/use-translated-languages";
+import { createTTSService } from "@/services/tts";
 
 // Minimal typings for Web Speech API to satisfy TypeScript
 // Minimal typings for Web Speech API to satisfy TypeScript
@@ -44,6 +46,7 @@ async function translateText(text: string, fromISO2: string, toISO2: string) {
 export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPanelProps) {
   const { state: settings } = useSettings();
   const { t } = useTranslation();
+  const { translatedLanguages } = useTranslatedLanguages();
   const [listening, setListening] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [finalTranscript, setFinalTranscript] = useState("");
@@ -127,41 +130,42 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
     setListening(true);
   };
 
-  const speak = (text: string, lang: string) => {
-    if (!("speechSynthesis" in window)) return;
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang;
+  const speak = async (text: string, lang: string) => {
+    if (!text.trim()) return;
+    
+    try {
+      setSpeaking(true);
 
-    const assignAndSpeak = () => {
+      // Create TTS service based on settings
+      const ttsService = createTTSService(
+        settings.tts.method, 
+        settings.tts.elevenlabsApiKey || undefined
+      );
+
+      if (!ttsService.isSupported()) {
+        console.warn("Selected TTS method not supported, falling back to native");
+        const fallbackService = createTTSService('native');
+        if (fallbackService.isSupported()) {
+          await fallbackService.speak(text, lang);
+        }
+        setSpeaking(false);
+        return;
+      }
+
+      await ttsService.speak(text, lang);
+      setSpeaking(false);
+    } catch (error) {
+      console.error("TTS failed:", error);
+      // Fallback to native TTS on error
       try {
-        const voices = window.speechSynthesis.getVoices?.() || [];
-        const langLower = lang.toLowerCase();
-        const base = langLower.split("-")[0];
-        const exact = voices.filter((v) => v.lang?.toLowerCase() === langLower);
-        const partial = voices.filter((v) => v.lang?.toLowerCase().startsWith(base));
-        const prefer = (arr: SpeechSynthesisVoice[]) => arr.find((v) => /google|microsoft/i.test(v.name)) || arr[0];
-        const chosen = prefer(exact) || prefer(partial) || voices[0];
-        if (chosen) u.voice = chosen;
-      } catch {}
-      u.rate = settings.tts.rate;
-      u.pitch = settings.tts.pitch;
-      u.volume = settings.tts.volume;
-      u.onstart = () => setSpeaking(true);
-      u.onend = () => setSpeaking(false);
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(u);
-    };
-
-    const existing = window.speechSynthesis.getVoices?.() || [];
-    if (!existing.length) {
-      const once = () => {
-        window.speechSynthesis.removeEventListener?.("voiceschanged", once as any);
-        assignAndSpeak();
-      };
-      window.speechSynthesis.addEventListener?.("voiceschanged", once as any);
-      window.speechSynthesis.getVoices?.();
-    } else {
-      assignAndSpeak();
+        const fallbackService = createTTSService('native');
+        if (fallbackService.isSupported()) {
+          await fallbackService.speak(text, lang);
+        }
+      } catch (fallbackError) {
+        console.error("Fallback TTS also failed:", fallbackError);
+      }
+      setSpeaking(false);
     }
   };
 
@@ -215,8 +219,8 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
           <Select value={srcLang} onValueChange={(v) => setSrcLang(v)}>
             <SelectTrigger aria-label={t("panel.sourceLangAria")}><SelectValue placeholder={t("panel.sourceLangAria")} /></SelectTrigger>
             <SelectContent className="max-h-72">
-              {POPULAR_LANGUAGES.map((l) => (
-                <SelectItem key={l.bcp47} value={l.bcp47}>{l.label}</SelectItem>
+              {translatedLanguages.map((l) => (
+                <SelectItem key={l.bcp47} value={l.bcp47}>{l.translatedLabel}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -226,8 +230,8 @@ export function TranslatorPanel({ title, sourceLang, targetLang }: TranslatorPan
           <Select value={tgtLang} onValueChange={(v) => setTgtLang(v)}>
             <SelectTrigger aria-label={t("panel.targetLangAria")}><SelectValue placeholder={t("panel.targetLangAria")} /></SelectTrigger>
             <SelectContent className="max-h-72">
-              {POPULAR_LANGUAGES.map((l) => (
-                <SelectItem key={l.bcp47} value={l.bcp47}>{l.label}</SelectItem>
+              {translatedLanguages.map((l) => (
+                <SelectItem key={l.bcp47} value={l.bcp47}>{l.translatedLabel}</SelectItem>
               ))}
             </SelectContent>
           </Select>
